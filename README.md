@@ -1,6 +1,3 @@
-# zsh_setting
-
-https://qiita.com/taijuf212/items/57fccf4550ac6a983b8d
 #zshrc
 alias vz='vim ~/.zshrc'
 alias sz='source ~/.zshrc'
@@ -18,9 +15,8 @@ alias gd='git diff'
 alias gl='git log'
 alias gfo='git fetch origin'
 alias gcm='git commit -m'
-alias gpo='git push origin'
-
-
+alias gp='git pull'
+alias gpsh='git push'
 
 # ruby
 alias rspec=‘bundle exec rspec’
@@ -31,8 +27,27 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 
-# コマンド補完
-autoload -U compinit && compinit -u
+# ----------------------------
+# Added by Zinit's installer
+# ----------------------------
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
 
-# 日本語ファイル名を表示可能にする
-setopt print_eight_bit
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+
+# ----------------------------
+# Zinit plugins
+# ----------------------------
+# シンタックスハイライト
+zinit light zsh-users/zsh-syntax-highlighting
+
+# 入力補完
+zinit light zsh-users/zsh-autosuggestions
