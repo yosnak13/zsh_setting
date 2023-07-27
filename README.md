@@ -1,3 +1,5 @@
+```
+
 # ----------------------------
 # Added automatically by Powerlevel10k
 # config can be reset: 'p10k configure'
@@ -19,15 +21,15 @@ alias gst='git status'
 alias gb='git branch'
 alias gc='git checkout'
 alias gsw='git switch'
-alias gct='git commit'
+alias gcm='git commit'
 alias gg='git grep'
-alias ga='git add'
+alias gad='git add'
 alias gd='git diff'
-alias gl='git log'
+alias gl='git log --oneline --graph'
 alias gfo='git fetch origin'
 alias gcm='git commit -m'
-alias gp='git pull'
-alias gpsh='git push'
+alias gpl='git pull'
+alias gps='git push'
 
 # ruby
 alias rspec=‘bundle exec rspec’
@@ -72,3 +74,9 @@ zinit light romkatv/powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+
+
+```
