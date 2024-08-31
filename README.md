@@ -31,6 +31,19 @@ alias gcm='git commit -m'
 alias gpl='git pull'
 alias gps='git push'
 
+# ssh-agent
+# Check if SSH agent is running, and if not, start it
+if [ -z "$SSH_AUTH_SOCK" ] || [ ! -S "$SSH_AUTH_SOCK" ]; then
+    # Start the SSH agent
+    eval "$(ssh-agent -s)"
+    # Save the SSH agent environment variables to a file
+    ssh-agent -s > ~/.ssh/ssh-agent.env
+else
+    # Load the SSH agent environment variables from the file
+    source ~/.ssh/ssh-agent.env
+fi
+
+
 # ruby
 alias rspec=‘bundle exec rspec’
 alias lint=‘bundle exec rubocop -A’
@@ -39,6 +52,12 @@ alias lint=‘bundle exec rubocop -A’
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+# golang
+export GOENV_ROOT=$HOME/.goenv
+export PATH=$GOENV_ROOT/bin:$PATH
+eval "$(goenv init -)"
+export GOPATH=$HOME/go
+PATH=$PATH:$GOPATH/bin
 
 # ----------------------------
 # Added by Zinit's installer
@@ -76,7 +95,15 @@ zinit light romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 
+
+# AWS CLI
+export AWS_DEFAULT_PROFILE=admin
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+~
 
 
 ```
